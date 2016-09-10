@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zgj.dao.ReceivingMapper" >
+  <resultMap id="BaseResultMap" type="com.zgj.model.Receiving" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="getTime" property="gettime" jdbcType="DATE" />
+    <result column="menuType" property="menutype" jdbcType="VARCHAR" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="isError" property="iserror" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userId, getTime, menuType, location, price, isError
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from receiving
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from receiving
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zgj.model.Receiving" >
+    insert into receiving (id, userId, getTime, 
+      menuType, location, price, 
+      isError)
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{gettime,jdbcType=DATE}, 
+      #{menutype,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{iserror,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zgj.model.Receiving" >
+    insert into receiving
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="gettime != null" >
+        getTime,
+      </if>
+      <if test="menutype != null" >
+        menuType,
+      </if>
+      <if test="location != null" >
+        location,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="iserror != null" >
+        isError,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="gettime != null" >
+        #{gettime,jdbcType=DATE},
+      </if>
+      <if test="menutype != null" >
+        #{menutype,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="iserror != null" >
+        #{iserror,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zgj.model.Receiving" >
+    update receiving
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="gettime != null" >
+        getTime = #{gettime,jdbcType=DATE},
+      </if>
+      <if test="menutype != null" >
+        menuType = #{menutype,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="iserror != null" >
+        isError = #{iserror,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zgj.model.Receiving" >
+    update receiving
+    set userId = #{userid,jdbcType=INTEGER},
+      getTime = #{gettime,jdbcType=DATE},
+      menuType = #{menutype,jdbcType=VARCHAR},
+      location = #{location,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      isError = #{iserror,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
